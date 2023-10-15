@@ -22,15 +22,13 @@ class MonthlyEmployee(Employee):
         self.declare = ""
 
     def get_pay(self):
-        amount = super().get_pay()
-        self.pay = amount + (self.commission * self.contracts) + self.bonus
-        return self.pay
+        self.earned = self.pay + (self.commission * self.contracts) + self.bonus
+        return self.earned
     
     def __str__(self):
-        self.get_pay
         self.declare = super().__str__() + f" salary of {self.pay}"
         if self.commission:
-            self.declare += f" and receives a commission for {self.commission} contract(s) at {self.commission}/contract"
+            self.declare += f" and receives a commission for {self.contracts} contract(s) at {self.commission}/contract"
         elif self.bonus:
             self.declare += f" and receives a bonus commission of {self.bonus}"
         return self.declare + f".  Their total pay is {self.get_pay()}."
@@ -43,8 +41,8 @@ class ContractEmployee(Employee):
         self.declare = ""
 
     def get_pay(self):
-        self.pay = (self.hours * self.rate) + (self.commission * self.contracts) + self.bonus
-        return self.pay
+        self.earned = (self.hours * self.rate) + (self.commission * self.contracts) + self.bonus
+        return self.earned
     
     def __str__(self):
         self.declare = super().__str__() + f" of {self.hours} hours at {self.rate}/hour"
